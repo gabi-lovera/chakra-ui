@@ -1,0 +1,11 @@
+body{
+  background-color: #EDF2F7;
+}
+/* Login */
+.box-log{
+  margin-top: 30px;
+   background-color: #ffffff;
+   border-radius: 20px;
+   margin-left: 100px;
+   margin-right: 100px;
+}
