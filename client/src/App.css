@@ -1,11 +1,53 @@
-body{
-  background-color: #EDF2F7;
+body {
+  background-color: #edf2f7;
 }
+/* Home */
+
 /* Login */
-.box-log{
+.box-log {
+  background-color: #edf2f7;
+}
+.box-log-in {
+  background-color: #ffffff;
+  border-radius: 20px;
+  margin-left: 300px;
+  margin-right: 300px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.form-log {
   margin-top: 30px;
-   background-color: #ffffff;
-   border-radius: 20px;
-   margin-left: 100px;
-   margin-right: 100px;
+  margin-bottom: 30px;
+}
+.form-log input {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+/* Registation */
+.box-reg {
+  background-color: #edf2f7;
+  padding-left: 200px;
+}
+.box-reg-in {
+  background-color: #ffffff;
+  margin-left: 200px;
+  margin-right: 200px;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.form-reg {
+  margin: 20px;
+}
+.buttom-reg {
+  margin-top: 20px;
+}
+.terms {
+  margin-left: 10px;
+}
+/* Terms */
+.terms-box {
+  margin: 20px;
+  background-color: #ffffff;
+}
+.terms-page {
+  background-color: #edf2f7;
 }

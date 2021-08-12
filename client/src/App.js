@@ -15,8 +15,8 @@ function App({ Component }) {
         <Router>
           <NavBar />
           <Switch>
-            <Route path="/home">
-              <Login />
+            <Route exact path="/">
+              <Home />
             </Route>
             <Route path="/login">
               <Login />

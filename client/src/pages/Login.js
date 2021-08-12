@@ -1,31 +1,29 @@
 import {
   FormControl,
   FormLabel,
-  FormHelperText,
   Input,
-  Select,
   Box,
+  Button,
 } from "@chakra-ui/react";
 
 export default function Login() {
   return (
-    <Box>
-      <Box className="box-log" p="6">
-        <form>
-          <FormControl id="email">
-            <FormLabel>Email address</FormLabel>
-            <Input type="email" />
-            <FormHelperText>We'll never share your email.</FormHelperText>
+    <Box className="box-log" p="6">
+      <form className="form-log">
+        <Box className="box-log-in" p="6">
+          <FormControl id="username">
+            <FormLabel>Username</FormLabel>
+            <Input type="username" />
           </FormControl>
-          <FormControl id="country">
-            <FormLabel>Country</FormLabel>
-            <Select placeholder="Select country">
-              <option>United Arab Emirates</option>
-              <option>Nigeria</option>
-            </Select>
+          <FormControl id="password">
+            <FormLabel>Password</FormLabel>
+            <Input type="password" />
           </FormControl>
-        </form>
-      </Box>
+          <Button className="bt-log" colorScheme="teal" size="lg">
+            Logn in
+          </Button>
+        </Box>
+      </form>
     </Box>
   );
 }
