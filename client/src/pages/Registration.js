@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -8,6 +9,12 @@ import {
   Select,
   Box,
   Button,
+  Checkbox,
+  TabPanels,
+  Tab,
+  Tabs,
+  TabPanel,
+  TabList,
 } from "@chakra-ui/react";
 import { useHistory, Link } from "react-router-dom";
 import { Formik } from "formik";
@@ -15,6 +22,8 @@ import * as yup from "yup";
 
 export default function Registration() {
   const history = useHistory();
+  const [tabIndex, setTabIndex] = useState(0);
+
   const SignupSchema = yup.object().shape({
     password: yup
       .string()
@@ -25,10 +34,7 @@ export default function Registration() {
       .string()
       .oneOf([yup.ref("password"), null], "Passwords must match"),
     email: yup.string().email("invalid email").required("is necessary"),
-    terms: yup
-      .array()
-      .required("should accept terms and conditions")
-      .min(1, "should accept terms and conditions"),
+    terms: yup.boolean().oneOf([true],'Message'),
   });
   return (
     <Box className="box-reg" p="6">
@@ -44,18 +50,28 @@ export default function Registration() {
         }}
         validationSchema={SignupSchema}
         onSubmit={(data) => {
-          //if () {
-          Axios.post("http://localhost:3001/users/register", data);
-          //} else {
-          Axios.post("http://localhost:3001/teacher/register", data);
-          //}
-          history.push("/home");
+          if (tabIndex === 0) {
+            Axios.post("http://localhost:3001/users/register", data);
+          } else {
+            Axios.post("http://localhost:3001/teachers/register", data);
+          }
+          history.push("/");
         }}
       >
         {({ values, handleSubmit, errors, touched, handleChange }) => (
           <form onSubmit={handleSubmit}>
             <Box className="box-reg-in" p="6">
               <Box className="form-reg">
+                <Tabs onChange={(index) => setTabIndex(index)}>
+                  <TabList>
+                    <Tab>User</Tab>
+                    <Tab>Professor</Tab>
+                  </TabList>
+                  <TabPanels p="2rem">
+                    <TabPanel>Register as user</TabPanel>
+                    <TabPanel>Or register as porfessor</TabPanel>
+                  </TabPanels>
+                </Tabs>
                 <FormControl
                   id="username"
                   isValid={touched.username && !errors.username}
@@ -71,7 +87,20 @@ export default function Registration() {
                     {errors.username}
                   </FormErrorMessage>
                 </FormControl>
-
+                {tabIndex === 0 ? null : (
+                  <FormControl
+                    id="certificate"
+                    isValid={touched.certificate && !errors.certificate}
+                    isInvalid={touched.certificate && !!errors.certificate}
+                  >
+                    <FormLabel>Certificate</FormLabel>
+                    <Input
+                      name="certificate"
+                      onChange={handleChange}
+                      type="certificate"
+                    />
+                  </FormControl>
+                )}
                 <FormControl
                   id="password"
                   isValid={touched.password && !errors.password}
@@ -130,6 +159,16 @@ export default function Registration() {
                     <option>United Arab Emirates</option>
                     <option>Nigeria</option>
                   </Select>
+                </FormControl>
+                <FormControl id="terms">
+                  <Checkbox
+                    name="terms"
+                    feedback={errors.terms}
+                    onChange={handleChange}
+                    isInvalid={touched.terms && !!errors.terms}
+                  >
+                    Accept terms
+                  </Checkbox>
                 </FormControl>
                 <FormControl className="buttom-reg">
                   <Button

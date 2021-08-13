@@ -2,6 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Users from "./pages/Users";
 import Registration from "./pages/Registration";
 import Terms from "./pages/Terms";
 import NavBar from "./components/NavBar";
@@ -17,6 +18,9 @@ function App({ Component }) {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/users">
+              <Users />
             </Route>
             <Route path="/login">
               <Login />
