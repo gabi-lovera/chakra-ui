@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
 var session = require("express-session");
-const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerDocument = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 var indexRouter = require('./routes/index');
@@ -14,6 +14,25 @@ var teachersRouter = require('./routes/teachers');
 var loginRouter = require('./routes/login');
 
 var app = express();
+
+const options = {
+	definition: {
+		openapi: "3.0.0",
+		info: {
+			title: "Library API",
+			version: "1.0.0",
+			description: "A simple Express Library API",
+		},
+		servers: [
+			{
+				url: "http://localhost:3001",
+			},
+		],
+	},
+	apis: ["./routes/*.js"],
+};
+const specs = swaggerDocument(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(
   cors({
