@@ -39,4 +39,16 @@ router.post("/byid", (req, res) => {
   });
 });
 
+/* Get all users */
+router.get("/users", (req, res) => {
+  const sql = "SELECT * FROM users";
+
+  dbconn.query(sql, (error, result) => {
+    if (error) throw error;
+    if (result.length > 0) {
+      res.json(result);
+    } 
+  });
+});
+
 module.exports = router;

@@ -36,7 +36,7 @@ router.post("/register", (req, res) => {
     if (err) {
       console.log(err);
     }
-    dbConn.query(
+    dbconn.query(
       "INSERT INTO teachers (username, password, email, country, certificate) VALUES (?,?,?,?,?)",
       [username, hash, email, country, certificate]
     );
