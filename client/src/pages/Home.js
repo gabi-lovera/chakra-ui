@@ -38,7 +38,7 @@ export default function Home() {
       beds: 2,
       baths: 2,
       title: "Modern home in city center in the heart of historic Los Angeles",
-      formattedPrice: "$1,200.00",
+      formattedPrice: "$1,500.00",
       reviewCount: 33,
       rating: 4,
     },

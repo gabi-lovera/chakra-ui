@@ -162,6 +162,7 @@ export default function Registration() {
                 </FormControl>
                 <FormControl id="terms">
                   <Checkbox
+                  className="check-terms"
                     name="terms"
                     feedback={errors.terms}
                     onChange={handleChange}
