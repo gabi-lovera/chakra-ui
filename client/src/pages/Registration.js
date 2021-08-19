@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useHistory, Link } from "react-router-dom";
 import { Formik } from "formik";
+import Swal from 'sweetalert2'
 import * as yup from "yup";
 
 export default function Registration() {
@@ -55,6 +56,12 @@ export default function Registration() {
           } else {
             Axios.post("http://localhost:3001/teachers/register", data);
           }
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            showConfirmButton: false,
+            timer: 1500
+          })
           history.push("/");
         }}
       >
