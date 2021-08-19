@@ -1,4 +1,5 @@
 import { Box, Image, Badge, Grid } from "@chakra-ui/react";
+import GoToTop from "../components/GoToTop";
 
 export default function Home() {
   const property = [
@@ -95,6 +96,7 @@ export default function Home() {
           );
         })}
         </Grid>
+        <GoToTop />
       </Box>
     </Box>
   );
