@@ -9,7 +9,7 @@ const saltRounds = 10;
  * @swagger
  * components:
  *   schemas:
- *     Professor:
+ *     Sellers:
  *       type: object
  *       required:
  *         - username
@@ -19,16 +19,16 @@ const saltRounds = 10;
  *       properties:
  *         id:
  *           type: integer
- *           description: The auto-generated id of the professor
+ *           description: The auto-generated id of the sellers
  *         name:
  *           type: string
- *           description: The professor's name
+ *           description: The sellers's name
  *         email:
  *           type: string
  *           description: The verification email
  *         certificate:
  *           type: integer
- *           description: Certificate that validates your profession
+ *           description: Certificate that validates your business
  *       example:
  *         id: 1
  *         name: Sherlyn J. Davis
@@ -39,36 +39,31 @@ const saltRounds = 10;
  /**
   * @swagger
   * tags:
-  *   name: Professors
-  *   description: The Professors managing API
+  *   name: Sellers
+  *   description: The Sellers managing API
   */
-
-/* GET teachers listing. */
-router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
-});
-
+ 
 
 /**
  * @swagger
- * /teachers:
+ * /sellers:
  *   get:
- *     summary: Returns the list of all the professors
- *     tags: [Professors]
+ *     summary: Returns the list of all the sellers
+ *     tags: [Sellers]
  *     responses:
  *       200:
- *         description: The list of the professors
+ *         description: The list of the sellers
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Professor'
+ *                 $ref: '#/components/schemas/Sellers'
  */
 
-/* Get all teachers */
-router.get("/teachers", (req, res) => {
-  const sql = "SELECT * FROM teachers";
+/* Get all sellers */
+router.get("/", (req, res) => {
+  const sql = "SELECT * FROM sellers";
 
   dbconn.query(sql, (error, resultado) => {
     if (error) throw error;
@@ -82,28 +77,28 @@ router.get("/teachers", (req, res) => {
 
 /**
  * @swagger
- * /teachers:
+ * /sellers:
  *   post:
- *     summary: Create a new professor
- *     tags: [Professors]
+ *     summary: Create a new sellers
+ *     tags: [Sellers]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Professor'
+ *             $ref: '#/components/schemas/Seller'
  *     responses:
  *       200:
- *         description: The professor was successfully created
+ *         description: The seller was successfully created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Professor'
+ *               $ref: '#/components/schemas/Seller'
  *       500:
  *         description: Some server error
  */
 
-/* Register teacher */
+/* Register seller */
 router.post("/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -116,7 +111,7 @@ router.post("/register", (req, res) => {
       console.log(err);
     }
     dbconn.query(
-      "INSERT INTO teachers (username, password, email, country, certificate) VALUES (?,?,?,?,?)",
+      "INSERT INTO sellers (username, password, email, country, certificate) VALUES (?,?,?,?,?)",
       [username, hash, email, country, certificate]
     );
   });

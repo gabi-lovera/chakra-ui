@@ -17,7 +17,7 @@ const saltRounds = 10;
  *       properties:
  *         id:
  *           type: string
- *           description: The auto-generated id of the book
+ *           description: The auto-generated id of the user
  *         name:
  *           type: string
  *           description: The user's name
@@ -36,12 +36,7 @@ const saltRounds = 10;
   *   name: Users
   *   description: The Users managing API
   */
-
-
-/* GET users listing. */
-router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
-});
+ 
 
 /**
  * @swagger

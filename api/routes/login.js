@@ -3,20 +3,15 @@ var router = express.Router();
 var dbConn = require("../db");
 const bcrypt = require("bcrypt");
 
-/* GET login listing. */
-router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
-});
-
-/* Login users and teachers */
+/* Login users and traders */
 router.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   dbConn.query(
     `SELECT * FROM (SELECT * FROM users
                       UNION ALL
-                      SELECT * FROM teachers) 
-        t WHERE username=?;`,
+                      SELECT * FROM sellers) 
+        couple WHERE username=?;`,
     username,
     (err, result) => {
       if (err) {
