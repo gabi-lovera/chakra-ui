@@ -1,7 +1,45 @@
+import { useState, useEffect, useContext } from "react";
 import { Box, Image, Badge, Grid } from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
+import { AuthContext } from "../helpers/AuthContext";
 import GoToTop from "../components/GoToTop";
+import Swal from "sweetalert2";
+import Axios from "axios";
 
 export default function Home() {
+  const [products, setProducts] = useState([]);
+  const { authState } = useContext(AuthContext);
+  const history = useHistory();
+
+  const addCart = (product) => {
+    if (authState.id === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Must log in",
+        confirmButtonText: "ACCEPT!",
+        footer: '<a href="/login">Go to login page</a>',
+      });
+    } else {
+      Axios.post("http://localhost:3001/carts/add", {
+        idUser: authState.idUser,
+        idProduct: product.idProduct,
+      });
+    }
+  };
+
+  const goProduct = (product) => {
+    history.push(`product/${product.idProduct}`);
+  };
+
+  useEffect(() => {
+    Axios.post("http://localhost:3001/subastas/categoria", {
+      categoria: "Arte",
+    }).then((response) => {
+      setProducts(response.data);
+    });
+  }, []);
+
   const property = [
     {
       imageUrl: "https://bit.ly/2Z4KKcF",
@@ -47,54 +85,52 @@ export default function Home() {
   return (
     <Box className="box-home" p="6">
       <Box className="box-home-in" p="6">
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-        {property.map((val, key) => {
-          return (
-        
-            <Box
-              className="box-card"
-              maxW="sm"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-            >
-              <Image src={val.imageUrl} alt={val.imageAlt} />
-              <Box p="6">
-                <Box d="flex" alignItems="baseline">
-                  <Badge borderRadius="full" px="2" colorScheme="teal">
-                    New
-                  </Badge>
-                  <Box
-                    color="gray.500"
-                    fontWeight="semibold"
-                    letterSpacing="wide"
-                    fontSize="xs"
-                    textTransform="uppercase"
-                    ml="2"
-                  >
-                    {val.beds} beds &bull; {val.baths} baths
+        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+          {property.map((val, key) => {
+            return (
+              <Box
+                className="box-card"
+                maxW="sm"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+              >
+                <Image src={val.imageUrl} alt={val.imageAlt} />
+                <Box p="6">
+                  <Box d="flex" alignItems="baseline">
+                    <Badge borderRadius="full" px="2" colorScheme="teal">
+                      New
+                    </Badge>
+                    <Box
+                      color="gray.500"
+                      fontWeight="semibold"
+                      letterSpacing="wide"
+                      fontSize="xs"
+                      textTransform="uppercase"
+                      ml="2"
+                    >
+                      {val.beds} beds &bull; {val.baths} baths
+                    </Box>
                   </Box>
-                </Box>
-                <Box
-                  mt="1"
-                  fontWeight="semibold"
-                  as="h4"
-                  lineHeight="tight"
-                  isTruncated
-                >
-                  {val.title}
-                </Box>
-                <Box>
-                  {val.formattedPrice}
-                  <Box as="span" color="gray.600" fontSize="sm">
-                    / wk
+                  <Box
+                    mt="1"
+                    fontWeight="semibold"
+                    as="h4"
+                    lineHeight="tight"
+                    isTruncated
+                  >
+                    {val.title}
+                  </Box>
+                  <Box>
+                    {val.formattedPrice}
+                    <Box as="span" color="gray.600" fontSize="sm">
+                      / wk
+                    </Box>
                   </Box>
                 </Box>
               </Box>
-            </Box>
-            
-          );
-        })}
+            );
+          })}
         </Grid>
         <GoToTop />
       </Box>

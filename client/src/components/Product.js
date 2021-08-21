@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./Card.css";
+import Axios from "axios";
+import "./Product.css";
 
-export default function Card() {
+export default function Product() {
   const [products, setProducts] = useState([]);
+  const [commets, setCommets] = useState([]);
   let { id } = useParams();
 
   useEffect(() => {
@@ -17,9 +19,5 @@ export default function Card() {
     );
   }, []);
 
-  return (
-    <div className="div-card">
-     
-    </div>
-  );
+  return <div className="div-card"></div>;
 }
