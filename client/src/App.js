@@ -1,8 +1,10 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
 import Home from "./pages/Home";
+import About from "./pages/About";
 import Login from "./pages/Login";
 import Users from "./pages/Users";
+import Sell from "./pages/Sell";
 import Registration from "./pages/Registration";
 import Terms from "./pages/Terms";
 import NavBar from "./components/NavBar";
@@ -19,8 +21,14 @@ function App({ Component }) {
             <Route exact path="/">
               <Home />
             </Route>
+            <Route exact path="/about">
+              <About />
+            </Route>
             <Route exact path="/users">
               <Users />
+            </Route>
+            <Route exact path="/sell">
+              <Sell />
             </Route>
             <Route path="/login">
               <Login />

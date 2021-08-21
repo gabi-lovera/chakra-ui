@@ -1,6 +1,11 @@
 .link-txt {
   margin-left: 20px;
+  display: flex;
 }
+.link-txt:hover{
+  color: rgb(106, 125, 143);
+  transform: scale(1.1);
+} 
 .icon-l {
   display: flex;
   cursor: pointer;

@@ -49,6 +49,9 @@ body {
 .icon {
   margin-top: 4px;
 }
+.mg-eye{
+  margin: 12px;
+}
 /* Registation */
 .box-reg {
   background-color: #edf2f7;
@@ -72,6 +75,12 @@ body {
 }
 .check-terms {
   margin-top: 20px;
+}
+.tab-txt{
+  display: flex;
+}
+.eye-reg{
+  display: flex;
 }
 /* Terms */
 .terms-box {

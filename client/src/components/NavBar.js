@@ -12,7 +12,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { FaHome, FaSignOutAlt, FaNodeJs } from "react-icons/fa";
+import { FaHome, FaSignOutAlt, FaStore, FaShoppingBasket, FaUsers } from "react-icons/fa";
 import "./NavBar.css";
 
 export default function WithSubnavigation() {
@@ -46,20 +46,25 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text className="icon-l"
+          <Text
+            className="icon-l"
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
-            <FaNodeJs className="icon"/> Logo
+            <FaStore className="icon" /> E-commerce
           </Text>
-          
+
           <Flex display={{ base: "none", md: "flex" }} ml={10}></Flex>
-          <FaHome className="icon" />
-          <Link to="/"> Home</Link>
-          
-          <Link className="link-txt" to="/users"> Users</Link>
-        
+          <Link className="link-txt" to="/">
+            <FaHome className="icon" /> Home
+          </Link>
+          <Link className="link-txt" to="/about">
+            <FaUsers className="icon" /> About
+          </Link>
+          <Link className="link-txt" to="/sell">
+            <FaShoppingBasket className="icon" /> Sell
+          </Link>
         </Flex>
 
         <Stack

@@ -16,14 +16,21 @@ import {
   TabPanel,
   TabList,
 } from "@chakra-ui/react";
+import { FaUserTie, FaUserAlt } from "react-icons/fa";
+import { BsFillEyeSlashFill, BsFillEyeFill } from "react-icons/bs";
 import { useHistory, Link } from "react-router-dom";
 import { Formik } from "formik";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import * as yup from "yup";
 
 export default function Registration() {
   const history = useHistory();
   const [tabIndex, setTabIndex] = useState(0);
+
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
 
   const SignupSchema = yup.object().shape({
     password: yup
@@ -35,7 +42,7 @@ export default function Registration() {
       .string()
       .oneOf([yup.ref("password"), null], "Passwords must match"),
     email: yup.string().email("invalid email").required("is necessary"),
-    terms: yup.boolean().oneOf([true],'Message'),
+    terms: yup.boolean().oneOf([true], "Message"),
   });
   return (
     <Box className="box-reg" p="6">
@@ -54,14 +61,14 @@ export default function Registration() {
           if (tabIndex === 0) {
             Axios.post("http://localhost:3001/users/register", data);
           } else {
-            Axios.post("http://localhost:3001/teachers/register", data);
+            Axios.post("http://localhost:3001/traders/register", data);
           }
           Swal.fire({
-            icon: 'success',
-            title: 'Registro exitoso',
+            icon: "success",
+            title: "Registro exitoso",
             showConfirmButton: false,
-            timer: 1500
-          })
+            timer: 1500,
+          });
           history.push("/");
         }}
       >
@@ -72,11 +79,15 @@ export default function Registration() {
                 <Tabs onChange={(index) => setTabIndex(index)}>
                   <TabList>
                     <Tab>User</Tab>
-                    <Tab>Professor</Tab>
+                    <Tab>Trader</Tab>
                   </TabList>
                   <TabPanels p="2rem">
-                    <TabPanel>Register as user</TabPanel>
-                    <TabPanel>Or register as porfessor</TabPanel>
+                    <TabPanel className="tab-txt">
+                      <FaUserAlt className="icon" /> Register as user
+                    </TabPanel>
+                    <TabPanel className="tab-txt">
+                      <FaUserTie className="icon" /> Or register as trader
+                    </TabPanel>
                   </TabPanels>
                 </Tabs>
                 <FormControl
@@ -114,11 +125,26 @@ export default function Registration() {
                   isInvalid={touched.password && !!errors.password}
                 >
                   <FormLabel>Password</FormLabel>
-                  <Input
-                    name="password"
-                    onChange={handleChange}
-                    type="password"
-                  />
+                  <div className="eye-reg">
+                    <Input
+                      name="password"
+                      onChange={handleChange}
+                      type={passwordShown ? "text" : "password"}
+                    />
+                    <div className="mg-eye">
+                      {passwordShown ? (
+                        <BsFillEyeFill
+                          className="icon-pass"
+                          onClick={togglePasswordVisiblity}
+                        />
+                      ) : (
+                        <BsFillEyeSlashFill
+                          className="icon-pass"
+                          onClick={togglePasswordVisiblity}
+                        />
+                      )}
+                    </div>
+                  </div>
                   <FormErrorMessage type="invalid">
                     {errors.password}
                   </FormErrorMessage>
@@ -169,7 +195,7 @@ export default function Registration() {
                 </FormControl>
                 <FormControl id="terms">
                   <Checkbox
-                  className="check-terms"
+                    className="check-terms"
                     name="terms"
                     feedback={errors.terms}
                     onChange={handleChange}
